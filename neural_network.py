@@ -16,7 +16,7 @@ np.random.seed(42)
 # Data Loading
 # -----------------------------
 
-def load_data(filepath='train.csv'):
+def load_data(filepath='data/train.csv'):
     if not os.path.exists(filepath):
         raise FileNotFoundError(f"Dataset not found at {filepath}")
     return pd.read_csv(filepath)
@@ -198,7 +198,7 @@ def tune_architecture(X_train, y_train, X_val, y_val, learning_rate=0.01):
     print(f"Best architecture: {best_arch_str}")
     print(f"Best Val RMSE: ${best_score:,.2f}")
     
-    pd.DataFrame(results).to_csv('neural_network_tuning.csv', index=False)
+    pd.DataFrame(results).to_csv('results/neural network/neural_network_tuning.csv', index=False)
     return best_arch
 
 # -----------------------------
@@ -244,7 +244,7 @@ def plot_results(y_true, y_pred, costs):
     plt.grid(True)
     
     plt.tight_layout()
-    plt.savefig('neural_network_results.png', dpi=300)
+    plt.savefig('results/neural network/neural_network_results.png', dpi=300)
     plt.show()
 
 # -----------------------------
@@ -256,7 +256,7 @@ def main():
     print("NEURAL NETWORK - HOUSE PRICE PREDICTION")
     print("="*60)
     
-    df = load_data('train.csv')
+    df = load_data('data/train.csv')
     print(f"\nDataset: {df.shape[0]} rows, {df.shape[1]} columns")
     
     X, y = preprocess_data(df)
@@ -305,7 +305,7 @@ def main():
         'Value': [arch_str, 0.01, 1000, train_metrics['rmse'], test_metrics['rmse'], 
                   train_metrics['r2'], test_metrics['r2']]
     })
-    results_df.to_csv('neural_network_metrics.csv', index=False)
+    results_df.to_csv('results/neural network/neural_network_metrics.csv', index=False)
     
     print("\n" + "="*60)
     print("COMPLETED")

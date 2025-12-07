@@ -17,7 +17,7 @@ np.random.seed(42)
 # Data Loading
 # -----------------------------
 
-def load_data(filepath='train.csv'):
+def load_data(filepath='data/train.csv'):
     if not os.path.exists(filepath):
         raise FileNotFoundError(f"Dataset not found at {filepath}")
     return pd.read_csv(filepath)
@@ -134,7 +134,7 @@ def plot_predictions(y_true, y_pred, title="Linear Regression Results"):
     plt.grid(True)
     
     plt.tight_layout()
-    plt.savefig('linear_regression_results.png', dpi=300)
+    plt.savefig('results/linear/linear_regression_results.png', dpi=300)
     plt.show()
 
 
@@ -145,7 +145,7 @@ def plot_training_curve(losses):
     plt.ylabel('MSE Loss')
     plt.title('Training Loss Curve')
     plt.grid(True)
-    plt.savefig('linear_regression_training.png', dpi=300)
+    plt.savefig('results/linear/linear_regression_training.png', dpi=300)
     plt.show()
 
 # -----------------------------
@@ -157,7 +157,7 @@ def main():
     print("LINEAR REGRESSION - HOUSE PRICE PREDICTION")
     print("="*60)
     
-    df = load_data('train.csv')
+    df = load_data('data/train.csv')
     print(f"\nDataset: {df.shape[0]} rows, {df.shape[1]} columns")
     
     X, y = preprocess_data(df)
@@ -206,7 +206,7 @@ def main():
         'Train_R2': [train_metrics['r2'], train_metrics_gd['r2']],
         'Test_R2': [test_metrics['r2'], test_metrics_gd['r2']]
     })
-    results_df.to_csv('linear_regression_metrics.csv', index=False)
+    results_df.to_csv('results/linear/linear_regression_metrics.csv', index=False)
     
     print("\n" + "="*60)
     print("COMPLETED")
